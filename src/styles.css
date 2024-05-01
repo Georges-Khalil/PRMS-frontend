@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/@coreui/coreui/dist/css/coreui.min.css';
+body {
+    background-color: #f3f4f7;
+  }

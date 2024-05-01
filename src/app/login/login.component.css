@@ -1,0 +1,13 @@
+.c-app {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  .alert-wrapper {
+    padding-top: 20px; /* adjust this to change the distance from the top of the screen */
+    padding-left: 20px; /* adjust this to change the distance from the left of the screen */
+  }
+  
+  .alert-wrapper c-alert {
+    display: inline-block;
+  }
