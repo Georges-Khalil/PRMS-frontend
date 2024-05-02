@@ -6,13 +6,21 @@
     </div>
     <div class="row">
       <div class="col text-left">
-        <h2 class="mb-4">Projects <button class="btn btn-primary">Button</button></h2>
+        <div class="d-flex align-items-center mb-4">
+          <h2>Projects</h2>
+          <button class="btn btn-primary rounded-circle plus-button d-flex justify-content-center align-items-center" style="margin-left: 15px;">
+            <svg [cIcon]="icons.cilPlus" size="xxl"></svg>
+          </button>
+        </div>
         <div *ngFor="let project of projects">
           <div class="row">
             <div class="col-md-6 mb-4">
-              <c-card>
+              <c-card class="shadow-card">
                 <c-card-body>
-                  <h6>{{ project.project_title }}</h6>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6>{{ project.project_title }}</h6>
+                    <span class="badge badge-primary" style="color: black; font-size: 1em;">{{ project.completion_percentage }}%</span>
+                  </div>
                 </c-card-body>
               </c-card>
             </div>

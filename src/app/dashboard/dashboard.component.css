@@ -1,0 +1,17 @@
+.shadow-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+  .shadow-card:hover {
+    box-shadow: none;
+  }
+  .plus-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    text-align: center;
+    line-height: 40px;
+  }
+  

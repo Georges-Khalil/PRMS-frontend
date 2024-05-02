@@ -37,7 +37,7 @@ export class LoginComponent {
       )
       .subscribe((response: any) => {
         console.log(response);
-        this.userService.setUserId(response.id);
+        localStorage.setItem('userId', response.id);
         console.log(this.userService.getUserId());
         this.router.navigate(['/dashboard']);
       });
