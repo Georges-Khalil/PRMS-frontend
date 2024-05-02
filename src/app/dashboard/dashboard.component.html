@@ -1,31 +1,49 @@
 <div class="container">
-    <div class="row">
-      <div class="col text-center mb-4">
-        <h1>Dashboard</h1>
-      </div>
+  <div class="row">
+    <div class="col text-center mb-4">
+      <h1>Dashboard</h1>
     </div>
-    <div class="row">
-      <div class="col text-left">
-        <div class="d-flex align-items-center mb-4">
-          <h2>Projects</h2>
-          <button class="btn btn-primary rounded-circle plus-button d-flex justify-content-center align-items-center" style="margin-left: 15px;">
-            <svg [cIcon]="icons.cilPlus" size="xxl"></svg>
-          </button>
-        </div>
-        <div *ngFor="let project of projects">
-          <div class="row">
-            <div class="col-md-6 mb-4">
-              <c-card class="shadow-card">
+  </div>
+  <div class="row">
+    <div class="col text-left">
+      <div class="d-flex align-items-center mb-4">
+        <h2>Projects</h2>
+        <button class="btn btn-primary rounded-circle plus-button d-flex justify-content-center align-items-center" style="margin-left: 15px;">
+          <svg [cIcon]="icons.cilPlus" size="xxl"></svg>
+        </button>
+      </div>
+      <div *ngFor="let project of projects">
+        <div class="row">
+          <div class="col-md-6 mb-4 d-flex">
+            <div class="d-flex w-100 shadow-card" style="border-radius: 5px;">
+              <c-card class="flex-grow-1" style="border-radius: 5px 0 0 5px;">
                 <c-card-body>
                   <div class="d-flex justify-content-between align-items-center">
-                    <h6>{{ project.project_title }}</h6>
-                    <span class="badge badge-primary" style="color: black; font-size: 1em;">{{ project.completion_percentage }}%</span>
+                    <h6 class="my-auto" style="line-height: 1.5;">{{ project.project_title }}</h6>
+                    <span class="badge badge-primary my-auto" style="color: black; font-size: 1em; line-height: 1.5;">{{ project.completion_percentage }}%</span>
                   </div>
                 </c-card-body>
               </c-card>
+              <div class="d-flex flex-column">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 5px 0 0;">
+                      <svg [cIcon]="icons.cilPencil"></svg>
+                    </span>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 0 5px 0;">
+                      <svg [cIcon]="icons.cilTrash"></svg>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

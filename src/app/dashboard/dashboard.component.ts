@@ -4,7 +4,7 @@ import { UserServiceService } from '../user-service.service';
 import { CommonModule } from '@angular/common';
 import { CardModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { cilPlus } from '@coreui/icons';
+import { cilPlus, cilPencil, cilTrash } from '@coreui/icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +14,7 @@ import { cilPlus } from '@coreui/icons';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
-  icons = { cilPlus };
+  icons = { cilPlus, cilPencil, cilTrash };
   projects: any[] = [];
 
   constructor(private http: HttpClient, private userService: UserServiceService) {}
