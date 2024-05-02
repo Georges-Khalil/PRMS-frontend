@@ -39,6 +39,7 @@ export class LoginComponent {
         console.log(response);
         this.userService.setUserId(response.id);
         console.log(this.userService.getUserId());
+        this.router.navigate(['/dashboard']);
       });
   }
 

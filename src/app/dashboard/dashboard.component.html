@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+      <div class="col text-center mb-4">
+        <h1>Dashboard</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-left">
+        <h2 class="mb-4">Projects <button class="btn btn-primary">Button</button></h2>
+        <div *ngFor="let project of projects">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <c-card>
+                <c-card-body>
+                  <h6>{{ project.project_title }}</h6>
+                </c-card-body>
+              </c-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
