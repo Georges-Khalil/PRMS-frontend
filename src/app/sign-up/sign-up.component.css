@@ -1,7 +1,11 @@
-.c-app {
-    height: 95vh;
+.register-container {
     display: flex;
+    justify-content: center;
     align-items: center;
+    height: 95vh;
+  }
+  .register-form {
+    width: 35vw;
   }
   .alert-wrapper {
     padding-top: 20px;

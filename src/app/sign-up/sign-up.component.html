@@ -1,0 +1,65 @@
+<div class="alert-wrapper">
+    <c-alert color="danger" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </c-alert>
+  </div>
+<div class="register-container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 register-form">
+            <div class="card mx-4">
+                <div class="card-body p-4">
+                    <h1>Register</h1>
+                    <p class="text-muted">Create your account</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 10px 12px; border-radius: 5px 0 0 5px;"><svg [cIcon]="icons.cilUser"></svg></span>
+                        </div>
+                        <input class="form-control" type="text" placeholder="First Name" [(ngModel)]="firstName"
+                            name="firstName" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 10px 12px; border-radius: 5px 0 0 5px;"><svg [cIcon]="icons.cilUser"></svg></span>
+                        </div>
+                        <input class="form-control" type="text" placeholder="Last Name" [(ngModel)]="lastName"
+                            name="lastName" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 10px 12px; border-radius: 5px 0 0 5px;"><svg [cIcon]="icons.cilAt"></svg></span>
+                        </div>
+                        <input class="form-control" type="email" placeholder="Email" [(ngModel)]="email" name="email"
+                            required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 10px 12px; border-radius: 5px 0 0 5px;"><svg [cIcon]="icons.cilLockLocked"></svg></span>
+                        </div>
+                        <input class="form-control" type="password" placeholder="Password" [(ngModel)]="password"
+                            name="password" required>
+                    </div>
+
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style="padding: 10px 12px; border-radius: 5px 0 0 5px;"><svg [cIcon]="icons.cilBriefcase"></svg></span>
+                        </div>
+                        <input class="form-control" type="text" placeholder="Company Code" [(ngModel)]="companyCode"
+                            name="companyCode" required>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-6">
+                          <button class="btn btn-primary px-4" type="button" (click)="signUp()">Create Account</button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                          <button class="btn btn-link px-0" type="button" (click)="goBackToLogin()">Go back to login</button>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

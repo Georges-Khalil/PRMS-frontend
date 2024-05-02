@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { AlertComponent } from '@coreui/angular';
 import { CommonModule} from '@angular/common';
 import { UserServiceService } from '../user-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class LoginComponent {
   password: string = '';
   errorMessage : string = '';
 
-  constructor(private http: HttpClient, private userService: UserServiceService) { }
+  constructor(private http: HttpClient, private userService: UserServiceService, private router: Router) { }
 
   login() {
     this.http.post('http://localhost:8000/api/login', { email: this.email, password: this.password })
@@ -39,5 +40,9 @@ export class LoginComponent {
         this.userService.setUserId(response.id);
         console.log(this.userService.getUserId());
       });
+  }
+
+  signUp() {
+    this.router.navigate(['/sign-up']);
   }
 }
