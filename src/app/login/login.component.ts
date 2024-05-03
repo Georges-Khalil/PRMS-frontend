@@ -7,7 +7,6 @@ import { throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { AlertComponent } from '@coreui/angular';
 import { CommonModule} from '@angular/common';
-import { UserServiceService } from '../user-service.service';
 import { Router } from '@angular/router';
 
 
@@ -24,7 +23,7 @@ export class LoginComponent {
   password: string = '';
   errorMessage : string = '';
 
-  constructor(private http: HttpClient, private userService: UserServiceService, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   login() {
     this.http.post('http://localhost:8000/api/login', { email: this.email, password: this.password })
@@ -38,7 +37,6 @@ export class LoginComponent {
       .subscribe((response: any) => {
         console.log(response);
         localStorage.setItem('userId', response.id);
-        console.log(this.userService.getUserId());
         this.router.navigate(['/dashboard']);
       });
   }
