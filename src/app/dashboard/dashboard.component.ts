@@ -27,7 +27,12 @@ export class DashboardComponent implements OnInit{
       },
     );
   }
+  
   onPlusButtonClick() {
     this.router.navigate(['/create-project']);
+  }
+
+  editProject(id: number) {
+    this.router.navigate(['/edit-project', id]);
   }
 }
