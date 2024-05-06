@@ -1,43 +1,42 @@
 <div class="container">
-    <div class="row">
-      <div class="col text-center mb-4">
-        <h1 class="mt-4">Project Details</h1>
-      </div>
+  <div class="row">
+    <div class="col text-center mb-4">
+      <h1 class="mt-4">{{ project.project_title }}</h1>
     </div>
-    <div class="row">
-      <div class="col text-left">
-        <div class="d-flex align-items-center mb-4">
-          <h2>Reports</h2>
-          <button class="btn btn-primary rounded-circle plus-button d-flex justify-content-center align-items-center" style="margin-left: 15px;" (click)="onPlusButtonClick()">
-            <svg [cIcon]="icons.cilPlus" size="xxl"></svg>
-          </button>
-        </div>
-        <div *ngFor="let project of projects">
-          <div class="row">
-            <div class="col-md-6 mb-4 d-flex">
-              <div class="d-flex w-100 shadow-card" style="border-radius: 5px;">
-                <c-card class="flex-grow-1" style="border-radius: 5px 0 0 5px;" (click)="goToProject(project.project_id)">
-                  <c-card-body>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h6 class="my-auto" style="line-height: 1.5;">{{ project.project_title }}</h6>
-                      <span class="badge badge-primary my-auto" style="color: black; font-size: 1em; line-height: 1.5;">{{ project.completion_percentage }}%</span>
-                    </div>
-                  </c-card-body>
-                </c-card>
-                <div class="d-flex flex-column">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 5px 0 0;" (click)="editProject(project.project_id)">
-                        <svg [cIcon]="icons.cilPencil"></svg>
-                      </span>
-                    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 text-left">
+      <div class="d-flex align-items-center mb-4">
+        <h2>Reports</h2>
+        <button class="btn btn-primary rounded-circle plus-button d-flex justify-content-center align-items-center" style="margin-left: 15px;" (click)="onPlusButtonClick()">
+          <svg [cIcon]="icons.cilPlus" size="xxl"></svg>
+        </button>
+      </div>
+      <div *ngFor="let report of reports">
+        <div class="row">
+          <div class="col-md-12 mb-4 d-flex">
+            <div class="d-flex w-100 shadow-card" style="border-radius: 5px;">
+              <c-card class="flex-grow-1" style="border-radius: 5px 0 0 5px;" >
+                <c-card-body>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="my-auto" style="line-height: 1.5;">{{ report.report_title }}</h6>
+                    <span class="badge badge-primary my-auto" style="color: black; font-size: 1em; line-height: 1.5;">{{ report.completion_percentage }}%</span>
                   </div>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 0 5px 0;" (click)="openDeleteModal(project.project_id)">
-                        <svg [cIcon]="icons.cilTrash"></svg>
-                      </span>
-                    </div>
+                </c-card-body>
+              </c-card>
+              <div class="d-flex flex-column">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 5px 0 0;" (click)="editReport(report.report_id)">
+                      <svg [cIcon]="icons.cilPencil"></svg>
+                    </span>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 0 5px 0;" (click)="openDeleteModal(report.report_id)">
+                      <svg [cIcon]="icons.cilTrash"></svg>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -46,19 +45,27 @@
         </div>
       </div>
     </div>
+    <div class="col-md-6 text-left">
+      <div class="col text-right">
+        <h2>Project Description</h2>
+        <p>{{ projectDescription }}</p>
+      </div>
+    </div>
   </div>
-  <c-modal id="deleteModal" [visible]="deleteModalVisible" (visibleChange)="handleDeleteModalChange($event)">
-    <c-modal-header>
-      <h5 cModalTitle>Delete Project</h5>
-      <button (click)="closeDeleteModal()" cButtonClose></button>
-    </c-modal-header>
-    <c-modal-body>Are you sure you want to delete this project? Deleting the project will also delete all the reports and tasks associated to it.</c-modal-body>
-    <c-modal-footer>
-      <button (click)="closeDeleteModal()" cButton color="secondary">
-        Cancel
-      </button>
-      <button (click)="deleteProject()" cButton color="primary">
-        Delete
-      </button>
-    </c-modal-footer>
-  </c-modal>
+</div>
+
+<c-modal id="deleteModal" [visible]="deleteModalVisible" (visibleChange)="handleDeleteModalChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Delete Project</h5>
+    <button (click)="closeDeleteModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>Are you sure you want to delete this report? Deleting the report will also delete all the tasks associated with it.</c-modal-body>
+  <c-modal-footer>
+    <button (click)="closeDeleteModal()" cButton color="secondary">
+      Cancel
+    </button>
+    <button (click)="deleteReport()" cButton color="primary">
+      Delete
+    </button>
+  </c-modal-footer>
+</c-modal>

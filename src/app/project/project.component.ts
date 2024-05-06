@@ -25,31 +25,43 @@ import {
 })
 export class ProjectComponent implements OnInit{
   icons = { cilPlus, cilPencil, cilTrash };
-  projects: any[] = [];
+  reports: any[] = [];
+  projectDescription: string = '';
   deleteModalVisible = false;
-  projectIdToDelete: number | null = null;
+  reportIdToDelete: number | null = null;
+  project: any = {}; // Define project property
+
 
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    const userId = localStorage.getItem('userId') || '-1';
-    this.http.get<any[]>(`http://localhost:8000/api/user/projects`, { params: { user_id: userId } }).subscribe(
-      (projects: any[]) => {
-        this.projects = projects;
+    
+    const projectId = localStorage.getItem('projectId') || '-1';
+  
+    this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
+      (reports: any[]) => {
+        this.reports = reports;
       },
+      
     );
+    this.http.get<any>('http://localhost:8000/api/projects/${projectId}/details', { params: { project_id: projectId } }).subscribe(
+      (projectData: any) => {
+        this.project = projectData;
+      },
+      );
   }
+
   
   onPlusButtonClick() {
-    this.router.navigate(['/create-project']);
+    this.router.navigate(['/create-report']);
   }
 
-  editProject(id: number) {
-    this.router.navigate(['/edit-project', id]);
+  editReport(id: number) {
+    this.router.navigate(['/edit-report', id]);
   }
 
-  openDeleteModal(projectId: number) {
-    this.projectIdToDelete = projectId;
+  openDeleteModal(reportId: number) {
+    this.reportIdToDelete = reportId;
     this.deleteModalVisible = true;
   }
 
@@ -61,9 +73,9 @@ export class ProjectComponent implements OnInit{
     this.deleteModalVisible = event;
   }
 
-  deleteProject() {
-    if (this.projectIdToDelete !== null) {
-      this.http.delete(`http://localhost:8000/api/projects/${this.projectIdToDelete}`).subscribe(
+  deleteReport() {
+    if (this.reportIdToDelete !== null) {
+      this.http.delete(`http://localhost:8000/api/reports/${this.reportIdToDelete}/`).subscribe(
         response => {
           this.closeDeleteModal();
           this.ngOnInit();
