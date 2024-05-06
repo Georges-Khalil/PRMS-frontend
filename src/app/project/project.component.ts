@@ -38,8 +38,8 @@ export class ProjectComponent implements OnInit{
     const projectId = this.route.snapshot.paramMap.get('id');
     if (projectId) {
       this.http.get<any>(`http://localhost:8000/api/projects/${projectId}/details`, { params: { project_id: projectId } }).subscribe(
-        (projectData: any) => {
-          this.project = projectData;
+        (response: any) => {
+          this.project = response.project;
         },
       );
       this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
