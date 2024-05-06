@@ -48,7 +48,7 @@ export class ProjectComponent implements OnInit{
       (projectData: any) => {
         this.project = projectData;
       },
-      );
+      
   }
 
   
