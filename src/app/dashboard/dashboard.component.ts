@@ -74,4 +74,8 @@ export class DashboardComponent implements OnInit{
       );
     }
   }
+
+  goToProject(id: number) {
+    this.router.navigate(['/project', id]);
+  }
 }
