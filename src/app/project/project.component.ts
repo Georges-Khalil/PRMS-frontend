@@ -27,10 +27,9 @@ import {
 export class ProjectComponent implements OnInit{
   icons = { cilPlus, cilPencil, cilTrash };
   reports: any[] = [];
-  projectDescription: string = '';
   deleteModalVisible = false;
   reportIdToDelete: number | null = null;
-  project: any = {}; // Define project property
+  project: any = {};
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
@@ -38,17 +37,19 @@ export class ProjectComponent implements OnInit{
   ngOnInit() {
     const projectId = this.route.snapshot.paramMap.get('id');
     if (projectId) {
-      this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
-        (reports: any[]) => {
-          this.reports = reports;
-        },
-      );
       this.http.get<any>(`http://localhost:8000/api/projects/${projectId}/details`, { params: { project_id: projectId } }).subscribe(
         (projectData: any) => {
           this.project = projectData;
         },
       );
+      this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
+        (reports: any[]) => {
+          this.reports = reports;
+        },
+      );
+      
     }
+  
   }
 
   

@@ -48,7 +48,7 @@
     <div class="col-md-6 text-left">
       <div class="col text-right">
         <h2>Project Description</h2>
-        <p>{{ projectDescription }}</p>
+        <p>{{ project.project_description }}</p>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@
 
 <c-modal id="deleteModal" [visible]="deleteModalVisible" (visibleChange)="handleDeleteModalChange($event)">
   <c-modal-header>
-    <h5 cModalTitle>Delete Project</h5>
+    <h5 cModalTitle>Delete Report</h5>
     <button (click)="closeDeleteModal()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>Are you sure you want to delete this report? Deleting the report will also delete all the tasks associated with it.</c-modal-body>
