@@ -5,6 +5,7 @@ import { CardModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { cilPlus, cilPencil, cilTrash } from '@coreui/icons';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import {
   ButtonCloseDirective,
   ButtonDirective,
@@ -32,23 +33,22 @@ export class ProjectComponent implements OnInit{
   project: any = {}; // Define project property
 
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    
-    const projectId = localStorage.getItem('projectId') || '-1';
-  
-    this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
-      (reports: any[]) => {
-        this.reports = reports;
-      },
-      
-    );
-    this.http.get<any>('http://localhost:8000/api/projects/${projectId}/details', { params: { project_id: projectId } }).subscribe(
-      (projectData: any) => {
-        this.project = projectData;
-      },
-      
+    const projectId = this.route.snapshot.paramMap.get('id');
+    if (projectId) {
+      this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
+        (reports: any[]) => {
+          this.reports = reports;
+        },
+      );
+      this.http.get<any>(`http://localhost:8000/api/projects/${projectId}/details`, { params: { project_id: projectId } }).subscribe(
+        (projectData: any) => {
+          this.project = projectData;
+        },
+      );
+    }
   }
 
   
