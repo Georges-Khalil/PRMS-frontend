@@ -1,0 +1,11 @@
+.alert-wrapper {
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+  
+  .alert-wrapper c-alert {
+    display: inline-block;
+  }
+
+
+  
