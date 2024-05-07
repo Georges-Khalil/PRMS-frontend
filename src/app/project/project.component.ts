@@ -61,8 +61,8 @@ export class ProjectComponent implements OnInit{
     this.router.navigate(['/create-report', this.project.project_id]);
   }
 
-  editReport(id: number) {
-    this.router.navigate(['/edit-report', id]);
+  editReport(reportId: number) {
+    this.router.navigate(['/edit-report', this.project.project_id, reportId]);
   }
 
   openDeleteModal(reportId: number) {
