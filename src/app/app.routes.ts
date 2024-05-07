@@ -17,5 +17,5 @@ export const routes: Routes = [
     { path: 'edit-project/:id', component: EditProjectComponent },
     { path: 'project/:id', component: ProjectComponent },
     { path: 'create-report/:projectId', component: CreateReportComponent },
-    { path: 'edit-report/:id', component: EditReportComponent },
+    { path: 'edit-report/:projectId/:reportId', component: EditReportComponent },
 ];
