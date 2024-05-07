@@ -22,14 +22,17 @@ export class CreateReportComponent {
   errorMessage : string = '';
   
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute) {}
-
+  
   onSubmit() {
     const formData = this.ReportForm.value;
-    const projectId = this.route.snapshot.paramMap.get('ProjectId');
+    const ProjectId = this.route.snapshot.paramMap.get('projectId');
+
     const data = {
       user_id: localStorage.getItem('userId'),
       report_title: formData.title,
-      report_description: formData.description
+      report_description: formData.description,
+      project_id:ProjectId
+
     };
   
 
