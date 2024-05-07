@@ -30,6 +30,8 @@ export class ProjectComponent implements OnInit{
   deleteModalVisible = false;
   reportIdToDelete: number | null = null;
   project: any = {};
+  emails: string = "";
+  count: number =0;
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
@@ -40,6 +42,7 @@ export class ProjectComponent implements OnInit{
       this.http.get<any>(`http://localhost:8000/api/projects/${projectId}/details`, { params: { project_id: projectId } }).subscribe(
         (response: any) => {
           this.project = response.project;
+          this.emails = response.user_emails;
         },
       );
       this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
@@ -49,6 +52,7 @@ export class ProjectComponent implements OnInit{
       );
       
     }
+    this.count = this.emails.split.length +1;
   
   }
 
