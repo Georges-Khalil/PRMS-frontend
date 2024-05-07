@@ -45,16 +45,21 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6 text-left">
-      <div class="col text-right" style="margin-left: 50px; line-height: 6;">
+      <div class="col text-right" style="margin-left: 60px; line-height: 6;">
         <h2>Project Details</h2>
         <h6><br></h6>
         <h6 class="my-auto" style="line-height: 2; margin-top: 8000px;">{{ project.project_description }}</h6>
+
+        <div class="d-flex justify-content-center align-items-center mt-5">
+            <h1>
+              <svg [cIcon]="icons.cilGroup" width="50" height="50"></svg>
+              <br>
+              {{ count }}
+            </h1>
+
+
       </div>
-    </div>
-    
-    
-  </div>
+      
 </div>
 
 <c-modal id="deleteModal" [visible]="deleteModalVisible" (visibleChange)="handleDeleteModalChange($event)">

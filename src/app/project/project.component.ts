@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CardModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { cilPlus, cilPencil, cilTrash } from '@coreui/icons';
+import { cilPlus, cilPencil, cilTrash, cilGroup } from '@coreui/icons';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -25,11 +25,13 @@ import {
   styleUrl: './project.component.css'
 })
 export class ProjectComponent implements OnInit{
-  icons = { cilPlus, cilPencil, cilTrash };
+  icons = { cilPlus, cilPencil, cilTrash, cilGroup };
   reports: any[] = [];
   deleteModalVisible = false;
   reportIdToDelete: number | null = null;
   project: any = {};
+  emails: string = "";
+  count: number =0;
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
@@ -40,6 +42,7 @@ export class ProjectComponent implements OnInit{
       this.http.get<any>(`http://localhost:8000/api/projects/${projectId}/details`, { params: { project_id: projectId } }).subscribe(
         (response: any) => {
           this.project = response.project;
+          this.emails = response.user_emails;
         },
       );
       this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
@@ -49,6 +52,7 @@ export class ProjectComponent implements OnInit{
       );
       
     }
+    this.count = this.emails.split.length +1;
   
   }
 
