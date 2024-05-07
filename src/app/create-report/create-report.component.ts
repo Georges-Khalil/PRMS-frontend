@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertComponent } from '@coreui/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-report',
@@ -20,10 +21,11 @@ export class CreateReportComponent {
   });
   errorMessage : string = '';
   
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute) {}
 
   onSubmit() {
     const formData = this.ReportForm.value;
+    const projectId = this.route.snapshot.paramMap.get('ProjectId');
     const data = {
       user_id: localStorage.getItem('userId'),
       report_title: formData.title,

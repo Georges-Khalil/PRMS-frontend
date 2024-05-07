@@ -8,31 +8,30 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-edit-project',
+  selector: 'app-edit-report',
   standalone: true,
   imports: [ReactiveFormsModule, HttpClientModule, AlertComponent, CommonModule],
   templateUrl: './edit-report.component.html',
   styleUrl: './edit-report.component.css'
 })
 export class EditReportComponent {
-  projectForm = this.fb.group({
+  reportForm = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required],
-    members: ['', Validators.required]
   });
   errorMessage : string = '';
 
   constructor(private fb: FormBuilder, private router: Router, private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const projectId = this.route.snapshot.paramMap.get('id');
-    this.http.get<{ project: any, user_emails: string }>(`http://localhost:8000/api/projects/${projectId}/details`).subscribe(
+    const reportId = this.route.snapshot.paramMap.get('reportId');
+    this.http.get<{ report: any }>(`http://localhost:8000/api/reports/${reportId}/details`).subscribe(
       response => {
-        const project = response.project;
-        this.projectForm.patchValue({
-          title: project.project_title,
-          description: project.project_description,
-          members: response.user_emails
+        const report = response.report;
+        this.reportForm.patchValue({
+          title: report.report_title,
+          description: report.report_description,
+          
         });
       },
       error => {
@@ -43,18 +42,18 @@ export class EditReportComponent {
   }
 
   onSubmit() {
-    const formData = this.projectForm.value;
-    const projectId = this.route.snapshot.paramMap.get('id');
+    const formData = this.reportForm.value;
+    const reportId = this.route.snapshot.paramMap.get('reportId');
     const data = {
-      project_title: formData.title,
-      project_description: formData.description,
-      member_emails: formData.members
+      report_title: formData.title,
+      report_description: formData.description,
     };
 
-    this.http.put(`http://localhost:8000/api/projects/${projectId}`, data).subscribe(
+    this.http.put(`http://localhost:8000/api/reports/${reportId}`, data).subscribe(
       response => {
         console.log(response);
-        this.router.navigate(['/dashboard']);
+        const projectId = this.route.snapshot.paramMap.get('projectId');
+        this.router.navigate(['/project', projectId]);
       },
       error => {
         for (let field in error.error.errors) {
@@ -66,6 +65,7 @@ export class EditReportComponent {
   }
 
   returnToDashboard() {
-    this.router.navigate(['/dashboard']);
+    const projectId = this.route.snapshot.paramMap.get('projectId');
+    this.router.navigate(['/project', projectId]);
   }
 }

@@ -9,7 +9,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+          <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
             <div class="form-group mb-4">
               <label for="title" class="font-weight-bold text-dark h6">Report Title</label>
               <input type="text" class="form-control" id="title" formControlName="title" placeholder="" required>
@@ -20,7 +20,7 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <button type="submit" class="btn btn-primary" [disabled]="!projectForm.valid">Edit Report</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!reportForm.valid">Edit Report</button>
               </div>
               <div class="col-6 d-flex justify-content-end">
                 <button class="btn btn-link px-0" type="button" (click)="returnToDashboard()">Return to Project</button>
