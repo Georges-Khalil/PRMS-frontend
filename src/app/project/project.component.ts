@@ -54,7 +54,7 @@ export class ProjectComponent implements OnInit{
 
   
   onPlusButtonClick() {
-    this.router.navigate(['/create-report']);
+    this.router.navigate(['/create-report', this.project.project_id]);
   }
 
   editReport(id: number) {
