@@ -30,7 +30,8 @@ export class ProjectComponent implements OnInit{
   deleteModalVisible = false;
   reportIdToDelete: number | null = null;
   project: any = {};
-  emails: string = "";
+  emails: string = '';
+  emailsstring: string = 'kingos';
   count: number =0;
 
 
@@ -38,6 +39,7 @@ export class ProjectComponent implements OnInit{
 
   ngOnInit() {
     const projectId = this.route.snapshot.paramMap.get('id');
+    console.log(this.emails);
     if (projectId) {
       this.http.get<any>(`http://localhost:8000/api/projects/${projectId}/details`, { params: { project_id: projectId } }).subscribe(
         (response: any) => {
@@ -52,7 +54,10 @@ export class ProjectComponent implements OnInit{
       );
       
     }
-    this.count = this.emails.split.length +1;
+    console.log(this.emails);
+    this.count = this.emails.split('@').length ;
+    console.log(this.emails);
+    console.log(this.count);
   
   }
 
