@@ -43,6 +43,9 @@ export class ProjectComponent implements OnInit{
         (response: any) => {
           this.project = response.project;
           this.emails = response.user_emails;
+          this.count = this.emails.split(',').length;
+          console.log(this.emails);
+          console.log(this.count);
         },
       );
       this.http.get<any[]>(`http://localhost:8000/api/projects/${projectId}/reports`, { params: { project_id: projectId } }).subscribe(
@@ -52,11 +55,6 @@ export class ProjectComponent implements OnInit{
       );
       
     }
-    console.log(this.emails);
-    this.count = this.emails.split('@').length ;
-    console.log(this.emails);
-    console.log(this.count);
-  
   }
 
   
