@@ -28,7 +28,6 @@ export class CreateReportComponent {
     const ProjectId = this.route.snapshot.paramMap.get('projectId');
 
     const data = {
-      user_id: localStorage.getItem('userId'),
       report_title: formData.title,
       report_description: formData.description,
       project_id:ProjectId
@@ -39,7 +38,7 @@ export class CreateReportComponent {
   this.http.post('http://localhost:8000/api/reports', data).subscribe(
       response => {
         console.log(response);
-        this.router.navigate(['project/:id']);
+        this.router.navigate(['project', ProjectId]);
       },
       error => {
         console.log(error);
@@ -49,7 +48,8 @@ export class CreateReportComponent {
   }
 
   returnToDashboard() {
-    this.router.navigate(['/dashboard']);
+    const ProjectId = this.route.snapshot.paramMap.get('projectId');
+    this.router.navigate(['project', ProjectId]);
   }
 
 
