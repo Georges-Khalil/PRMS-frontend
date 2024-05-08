@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CardModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { cilPlus, cilPencil, cilTrash, cilGroup } from '@coreui/icons';
+import { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop } from '@coreui/icons';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -25,7 +25,7 @@ import {
   styleUrl: './project.component.css'
 })
 export class ProjectComponent implements OnInit{
-  icons = { cilPlus, cilPencil, cilTrash, cilGroup };
+  icons = { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop };
   reports: any[] = [];
   deleteModalVisible = false;
   reportIdToDelete: number | null = null;

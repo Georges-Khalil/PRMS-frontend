@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CardModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { cilPlus, cilPencil, cilTrash, cilGroup } from '@coreui/icons';
+import { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop } from '@coreui/icons';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -25,7 +25,7 @@ import {
   styleUrl: './report.component.css'
 })
 export class ReportComponent implements OnInit{
-  icons = { cilPlus, cilPencil, cilTrash, cilGroup };
+  icons = { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop };
   tasks: any[] = [];
   deleteModalVisible = false;
   report: any ={};
@@ -58,8 +58,18 @@ export class ReportComponent implements OnInit{
   }
 
   editTask(taskId: number) {
-    this.router.navigate(['/edit-task', this.report.project_id, taskId]);
-  }
+    const apiUrl = `http://localhost:8000/api/tasks/${taskId}/updateCurrentCount`;
+
+    this.http.put(apiUrl, {}).subscribe(
+      response => {
+        console.log('API Response:', response);
+        location.reload();
+      },
+      error => {
+        console.error('API Error:', error);
+      }
+    );
+  } 
 
   openDeleteModal(taskId: number) {
     this.taskIdToDelete = taskId;
