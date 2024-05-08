@@ -93,7 +93,8 @@ export class ProjectComponent implements OnInit{
     }
   }
 
-  goToProject(projectId: number) {
-    this.router.navigate(['/reports', projectId]);
+  goToReport(reportId: number) {
+    const projectId = this.route.snapshot.paramMap.get('id');
+    this.router.navigate(['/report', projectId, reportId]);
   }
 }

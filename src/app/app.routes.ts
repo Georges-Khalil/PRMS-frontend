@@ -7,6 +7,8 @@ import { EditProjectComponent } from './edit-project/edit-project.component';
 import { ProjectComponent } from './project/project.component';
 import { CreateReportComponent } from './create-report/create-report.component';
 import { EditReportComponent } from './edit-report/edit-report.component';
+import { ReportComponent } from './report/report.component';
+
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -18,4 +20,5 @@ export const routes: Routes = [
     { path: 'project/:id', component: ProjectComponent },
     { path: 'create-report/:projectId', component: CreateReportComponent },
     { path: 'edit-report/:projectId/:reportId', component: EditReportComponent },
+    { path: 'report/:projectId/:reportId', component: ReportComponent },
 ];

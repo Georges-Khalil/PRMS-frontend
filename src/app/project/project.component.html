@@ -16,7 +16,7 @@
         <div class="row">
           <div class="col-md-12 mb-4 d-flex">
             <div class="d-flex w-100 shadow-card" style="border-radius: 5px;">
-              <c-card class="flex-grow-1" style="border-radius: 5px 0 0 5px;" >
+              <c-card class="flex-grow-1" style="border-radius: 5px 0 0 5px;" (click)="goToReport(report.report_id)">
                 <c-card-body>
                   <div class="d-flex justify-content-between align-items-center">
                     <h6 class="my-auto" style="line-height: 1.5;">{{ report.report_title }}</h6>
@@ -43,23 +43,22 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-      <div class="col text-right" style="margin-left: 60px; line-height: 6;">
-        <h2>Project Details</h2>
-        <h6><br></h6>
-        <h6 class="my-auto" style="line-height: 2; margin-top: 8000px;">{{ project.project_description }}</h6>
-
-        <div class="d-flex justify-content-center align-items-center mt-5">
-            <h1>
+        </div>
+        </div>
+        <div class="col text-right" style="margin-left: 60px; line-height: 6;">
+          <h2>Project Details</h2>
+          <h6><br></h6>
+          <h6 class="my-auto" style="line-height: 2; margin-top: 8000px;">{{ project.project_description }}</h6>
+        
+          <div class="d-flex justify-content-center align-items-center mt-5">
+            <div class="text-center">
               <svg [cIcon]="icons.cilGroup" width="50" height="50"></svg>
-              <br>
-              {{ count }}
-            </h1>
-
-
-      </div>
-      
+              <div style="margin-top: -30px;">
+                <h3 style="margin: 0;line-height: 1;">{{ count }}</h3>
+                <h3 style="margin: 0;line-height: 1;">members</h3>
+              </div>
+            </div>
+          </div>
 </div>
 
 <c-modal id="deleteModal" [visible]="deleteModalVisible" (visibleChange)="handleDeleteModalChange($event)">
