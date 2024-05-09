@@ -36,6 +36,7 @@ export class LoginComponent {
       )
       .subscribe((response: any) => {
         console.log(response);
+        localStorage.removeItem('userId');
         localStorage.setItem('userId', response.id);
         this.router.navigate(['/dashboard']);
       });
