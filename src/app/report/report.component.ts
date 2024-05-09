@@ -16,11 +16,12 @@ import {
   ModalTitleDirective,
   ThemeDirective
 } from '@coreui/angular';
+import { ProgressComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-report',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, CardModule, IconModule, ButtonDirective, ModalComponent, ModalHeaderComponent, ModalTitleDirective, ThemeDirective, ButtonCloseDirective, ModalBodyComponent, ModalFooterComponent],
+  imports: [CommonModule, HttpClientModule, CardModule, IconModule, ButtonDirective, ModalComponent, ModalHeaderComponent, ModalTitleDirective, ThemeDirective, ButtonCloseDirective, ModalBodyComponent, ModalFooterComponent, ProgressComponent],
   templateUrl: './report.component.html',
   styleUrl: './report.component.css'
 })
@@ -30,6 +31,7 @@ export class ReportComponent implements OnInit{
   deleteModalVisible = false;
   report: any ={};
   taskIdToDelete: number | null = null;
+  percentageCompletion: number = 0;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
@@ -46,6 +48,7 @@ export class ReportComponent implements OnInit{
     this.http.get<any[]>(`http://localhost:8000/api/reports/${reportId}/details`, { params: { report_id: reportId } }).subscribe(
         (response: any) => {
           this.report = response.report;
+          this.percentageCompletion = this.report.completion_percentage;
         },
       );
       
