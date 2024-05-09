@@ -54,7 +54,9 @@ export class ReportComponent implements OnInit{
 
   
   onPlusButtonClick() {
-    this.router.navigate(['/create-task', this.report.report_id]);
+    const projectId = this.route.snapshot.paramMap.get('projectId');
+    const reportId = this.route.snapshot.paramMap.get('reportId');
+    this.router.navigate(['/create-task', projectId, reportId]);
   }
 
   editTask(taskId: number) {
@@ -99,7 +101,8 @@ export class ReportComponent implements OnInit{
   }
 
   goToTask(taskId: number) {
-    const projectId = this.route.snapshot.paramMap.get('id');
-    this.router.navigate(['/task', projectId, taskId]);
+    const projectId = this.route.snapshot.paramMap.get('projectId');
+    const reportId = this.route.snapshot.paramMap.get('reportId');
+    this.router.navigate(['/edit-task', projectId, reportId, taskId]);
   }
 }

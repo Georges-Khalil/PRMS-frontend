@@ -8,6 +8,8 @@ import { ProjectComponent } from './project/project.component';
 import { CreateReportComponent } from './create-report/create-report.component';
 import { EditReportComponent } from './edit-report/edit-report.component';
 import { ReportComponent } from './report/report.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+import { CreateTaskComponent } from './create-task/create-task.component';
 
 
 export const routes: Routes = [
@@ -21,4 +23,6 @@ export const routes: Routes = [
     { path: 'create-report/:projectId', component: CreateReportComponent },
     { path: 'edit-report/:projectId/:reportId', component: EditReportComponent },
     { path: 'report/:projectId/:reportId', component: ReportComponent },
+    { path: 'edit-task/:projectId/:reportId/:taskId', component: EditTaskComponent},
+    { path: 'create-task/:projectId/:reportId', component: CreateTaskComponent}
 ];
