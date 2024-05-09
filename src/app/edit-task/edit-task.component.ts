@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -40,24 +40,24 @@ export class EditTaskComponent {
       }
     );
   }
+
+  @ViewChild('fileUpload') fileUpload!: ElementRef;
   
   onSubmit() {
     const formData = this.TaskForm.value;
     const taskId = this.route.snapshot.paramMap.get('taskId');
-
+    const userId = localStorage.getItem('userId');
+    const file = this.fileUpload.nativeElement.files[0];
+  
     const data = {
       task_name: formData.title,
       total_count: formData.totalCount,
-      current_count: formData.currentCount,
+      current_count: formData.currentCount
     };
-
-
+  
     this.http.put(`http://localhost:8000/api/tasks/${taskId}/update`, data).subscribe(
       response => {
         console.log(response);
-        const ProjectId = this.route.snapshot.paramMap.get('projectId');
-        const ReportId = this.route.snapshot.paramMap.get('reportId');
-        this.router.navigate(['report', ProjectId, ReportId]);
       },
       error => {
         for (let field in error.error.errors) {
@@ -66,6 +66,35 @@ export class EditTaskComponent {
         this.errorMessage = this.errorMessage;
       }
     );
+  
+    if (file) {
+      const fileData = new FormData();
+      fileData.append('file_data', file, file.name);
+      fileData.append('file_name', file.name);
+      fileData.append('file_size', file.size.toString());
+      fileData.append('file_type', file.type);
+      fileData.append('uploaded_by_user_id', userId || '');
+  
+      this.http.post(`http://localhost:8000/api/tasks/${taskId}/addAttachments`, fileData).subscribe(
+        response => {
+          console.log(response);
+          const ProjectId = this.route.snapshot.paramMap.get('projectId');
+          const ReportId = this.route.snapshot.paramMap.get('reportId');
+          this.router.navigate(['report', ProjectId, ReportId]);
+        },
+        error => {
+          for (let field in error.error.errors) {
+            this.errorMessage += `\n${field}: ${error.error.errors[field].join(', ')}`;
+          }
+          this.errorMessage = this.errorMessage;
+        }
+      );
+    }
+    else{
+      const ProjectId = this.route.snapshot.paramMap.get('projectId');
+      const ReportId = this.route.snapshot.paramMap.get('reportId');
+      this.router.navigate(['report', ProjectId, ReportId]);
+    }
   }
 
   returnToDashboard() {
@@ -73,4 +102,5 @@ export class EditTaskComponent {
     const ReportId = this.route.snapshot.paramMap.get('reportId');
     this.router.navigate(['report', ProjectId, ReportId]);
   }
+
 }
