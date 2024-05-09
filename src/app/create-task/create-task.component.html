@@ -1,1 +1,35 @@
-<p>create-task works, needs to be implemented</p>
+<h1 class="text-center mt-4">Create Task</h1>
+<div class="alert-wrapper">
+  <c-alert color="danger" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </c-alert>
+</div>
+<div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <form [formGroup]="TaskForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-4">
+              <label for="title" class="font-weight-bold text-dark h6">Task Name</label>
+              <input type="text" class="form-control" id="title" formControlName="title" placeholder="" required >
+            </div>
+            <div class="form-group mb-4">
+                <label for="totalCount" class="font-weight-bold text-dark h6">Total Count</label>
+                <input type="number" class="form-control" id="totalCount" formControlName="totalCount" placeholder="" required>
+                <small id="membersHelp" class="form-text text-muted">Enter the number of times you want the task to be done.</small>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <button type="submit" class="btn btn-primary" [disabled]="!TaskForm.valid">Create Task</button>
+              </div>
+              <div class="col-6 d-flex justify-content-end">
+                <button class="btn btn-link px-0" type="button" (click)="returnToDashboard()">Return to Report</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

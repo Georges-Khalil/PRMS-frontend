@@ -14,7 +14,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './create-report.component.css'
 })
 export class CreateReportComponent {
-
   ReportForm = this.fb.group({
     title: ['', Validators.required],
     description: ['', Validators.required]
@@ -51,8 +50,5 @@ export class CreateReportComponent {
     const ProjectId = this.route.snapshot.paramMap.get('projectId');
     this.router.navigate(['project', ProjectId]);
   }
-
-
-
-
+  
 }
