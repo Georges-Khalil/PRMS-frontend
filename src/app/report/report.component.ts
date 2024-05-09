@@ -109,7 +109,7 @@ export class ReportComponent implements OnInit{
     this.router.navigate(['/edit-task', projectId, reportId, taskId]);
   }
 
-  newFunction(taskId: number) {
+  fileDL(taskId: number) {
     this.http.get(`http://localhost:8000/api/tasks/${taskId}/attachments`).subscribe(
       (response: any) => {
         const fileData = response.attachments[0].file_data;
