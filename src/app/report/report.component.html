@@ -1,64 +1,74 @@
 <div class="container">
-    <div class="row">
-      <div class="col text-center mb-4">
-        <h1 class="mt-4">{{ report.report_title }}</h1>
-      </div>
+  <div class="row">
+    <div class="col text-center mb-4">
+      <h1 class="mt-4">{{ report.report_title }}</h1>
     </div>
-    <div class="row">
-      <div class="col-md-6 text-left">
-        <div class="d-flex align-items-center mb-4">
-          <h2>Tasks</h2>
-          <button class="btn btn-primary rounded-circle plus-button d-flex justify-content-center align-items-center" style="margin-left: 15px;" (click)="onPlusButtonClick()">
-            <svg [cIcon]="icons.cilPlus" size="xxl"></svg>
-          </button>
-        </div>
-        <div *ngFor="let task of tasks">
-          <div class="row">
-            <div class="col-md-12 mb-4 d-flex">
-              <div class="d-flex w-100 shadow-card" style="border-radius: 5px;">
-                <c-card class="flex-grow-1" style="border-radius: 5px 0 0 5px;" (click)="goToTask(task.task_id)">
-                  <c-card-body>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <h6 class="my-auto" style="line-height: 1.5;">{{ task.task_name }}</h6>
-                      <span class="badge badge-primary my-auto" style="color: black; font-size: 1em; line-height: 1.5;"> {{task.current_count }}/{{ task.total_count }}</span>
-                    </div>
-                  </c-card-body>
-                </c-card>
+  </div>
+  <div class="row">
+    <div class="col-md-6 text-left">
+      <div class="d-flex align-items-center mb-4">
+        <h2>Tasks</h2>
+        <button class="btn btn-primary rounded-circle plus-button d-flex justify-content-center align-items-center" style="margin-left: 15px;" (click)="onPlusButtonClick()">
+          <svg [cIcon]="icons.cilPlus" size="xxl"></svg>
+        </button>
+      </div>
+      <div *ngFor="let task of tasks">
+        <div class="row">
+          <div class="col-md-12 mb-4 d-flex">
+            <div class="d-flex w-100 shadow-card" style="border-radius: 5px;">
+              <c-card class="flex-grow-1" style="border-radius: 5px 0 0 5px;" (click)="goToTask(task.task_id)">
+                <c-card-body>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="my-auto" style="line-height: 1.5;">{{ task.task_name }}</h6>
+                    <span class="badge badge-primary my-auto" style="color: black; font-size: 1em; line-height: 1.5;"> {{task.current_count }}/{{ task.total_count }}</span>
+                  </div>
+                </c-card-body>
+              </c-card>
+              <div class="d-flex flex-row">
                 <div class="d-flex flex-column">
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 5px 0 0;" (click)="editTask(task.task_id)">
+                      <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 0px 0 0;" (click)="editTask(task.task_id)">
                         <svg [cIcon]="icons.cilChevronTop"></svg>
                       </span>
                     </div>
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 0 5px 0;" (click)="openDeleteModal(task.task_id)">
+                      <span class="input-group-text" style="padding: 10px 12px; border-radius: 0 0 0px 0;" (click)="openDeleteModal(task.task_id)">
                         <svg [cIcon]="icons.cilTrash"></svg>
                       </span>
                     </div>
                   </div>
+                  </div>
+                  <div class="d-flex flex-row">
+                    <div class="d-flex flex-column" style="margin-top: 5px;">
+                      <span class="paperclip-icon" style="padding: 25px 12px 25px 12px; cursor: pointer; background-color: #eff0f3; border: 1px solid #d3d4d6; border-radius: 0 5px 5px 0; margin: -3px 0;" (click)="newFunction(task.task_id)">
+                        <svg [cIcon]="icons.cilPaperclip"></svg>
+                      </span>
+                    </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col text-right" style="margin-left: 60px; line-height: 6;">
+      <h2>Report Details</h2>
+      <h6><br></h6>
+      <h6 class="my-auto" style="line-height: 2; margin-top: 8000px;">{{ report.report_description }}</h6>
+      <div class="d-flex justify-content-center align-items-center mt-5 row">
+        <div class="text-center col">
+          <c-progress [animated]="true" [value]="percentageCompletion" color="primary" variant="striped" />
+          <div style="position: relative; top: 25px;">
+            <h3 style="margin: 0;line-height: 1;">{{ percentageCompletion }}%</h3>
+            <h3 style="margin: 0;line-height: 1;">completed</h3>
+          </div>
         </div>
-        <div class="col text-right" style="margin-left: 60px; line-height: 6;">
-            <h2>Report Details</h2>
-            <h6><br></h6>
-            <h6 class="my-auto" style="line-height: 2; margin-top: 8000px;">{{ report.report_description }}</h6>
-            <div class="d-flex justify-content-center align-items-center mt-5 row">
-              <div class="text-center col">
-                <c-progress [animated]="true" [value]="percentageCompletion" color="primary" variant="striped" />
-                <div style="position: relative; top: 25px;">
-                  <h3 style="margin: 0;line-height: 1;">{{ percentageCompletion }}%</h3>
-                  <h3 style="margin: 0;line-height: 1;">completed</h3>
-                </div>
-              </div>
+      </div>
+    </div>
   </div>
-  
   <c-modal id="deleteModal" [visible]="deleteModalVisible" (visibleChange)="handleDeleteModalChange($event)">
     <c-modal-header>
       <h5 cModalTitle>Delete Task</h5>
@@ -76,4 +86,4 @@
       </button>
     </c-modal-footer>
   </c-modal>
-  
+</div>

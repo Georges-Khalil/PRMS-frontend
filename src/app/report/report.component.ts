@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { CardModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop } from '@coreui/icons';
+import { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop, cilPaperclip } from '@coreui/icons';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -26,7 +26,7 @@ import { ProgressComponent } from '@coreui/angular';
   styleUrl: './report.component.css'
 })
 export class ReportComponent implements OnInit{
-  icons = { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop };
+  icons = { cilPlus, cilPencil, cilTrash, cilGroup, cilChevronTop, cilPaperclip };
   tasks: any[] = [];
   deleteModalVisible = false;
   report: any ={};
@@ -107,5 +107,30 @@ export class ReportComponent implements OnInit{
     const projectId = this.route.snapshot.paramMap.get('projectId');
     const reportId = this.route.snapshot.paramMap.get('reportId');
     this.router.navigate(['/edit-task', projectId, reportId, taskId]);
+  }
+
+  newFunction(taskId: number) {
+    this.http.get(`http://localhost:8000/api/tasks/${taskId}/attachments`).subscribe(
+      (response: any) => {
+        const fileData = response.attachments[0].file_data;
+        const fileName = response.attachments[0].file_name;
+        const fileType = response.attachments[0].file_type;
+        const byteCharacters = atob(fileData);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: fileType });
+        const downloadURL = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = fileName;
+        link.click();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
