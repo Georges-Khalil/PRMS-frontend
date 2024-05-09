@@ -16,11 +16,12 @@ import {
   ModalTitleDirective,
   ThemeDirective
 } from '@coreui/angular';
+import { ProgressComponent } from '@coreui/angular';
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, CardModule, IconModule, ButtonDirective, ModalComponent, ModalHeaderComponent, ModalTitleDirective, ThemeDirective, ButtonCloseDirective, ModalBodyComponent, ModalFooterComponent],
+  imports: [CommonModule, HttpClientModule, CardModule, IconModule, ButtonDirective, ModalComponent, ModalHeaderComponent, ModalTitleDirective, ThemeDirective, ButtonCloseDirective, ModalBodyComponent, ModalFooterComponent, ProgressComponent],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
@@ -31,7 +32,8 @@ export class ProjectComponent implements OnInit{
   reportIdToDelete: number | null = null;
   project: any = {};
   emails: string = '';
-  count: number =0;
+  count: number = 0;
+  percentageCompletion: number = 0;
 
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
@@ -43,6 +45,7 @@ export class ProjectComponent implements OnInit{
         (response: any) => {
           this.project = response.project;
           this.emails = response.user_emails;
+          this.percentageCompletion = this.project.completion_percentage;
           this.count = this.emails.split(',').length;
           console.log(this.emails);
           console.log(this.count);
